@@ -37,11 +37,17 @@ https://ww1.microchip.com/downloads/en/DeviceDoc/doc2467.pdf
    4. SREG: SEI 
 */
 
+char a = 70;
+char b = 2;
+char buffer[20];
+unsigned int result;
+
+
 int main_interrupt (void) {
 	init_devices();
 	lcd_clear();
-	lcd_string(0, 0, "U1910");
-	lcd_string(1, 0, "jvjhvjh");
+	lcd_string(0, 0, "U1910049 & N-1");
+	lcd_string(1, 0, "Rustam & Sokhib");
 
 	//apps
 	DDRB = 0xFF;
@@ -65,19 +71,13 @@ int main_interrupt (void) {
 		hours += minutes / 60;
 		minutes %= 60;
 		
-		lcd_string(3, 0, buffer);
+		// lcd_string(3, 0, buffer);
 	}	
 	return 0;
 }
 
 SIGNAL (INT0_vect){
 	PORTB = ~PORTB;
-
-	char a, b, buffer[20];
-	unsigned int result;
-	
-	a = rand() % 128;
-	b = rand() % 128;
 	
 	result = a * b;
 	
@@ -85,7 +85,9 @@ SIGNAL (INT0_vect){
 	lcd_string(5, 0, "");
 
 	// Formatting the string
-	sprintf(buffer, "%d * %d = %u", a, b, result);
+	sprintf(buffer, "%d = %u", a, result);
+ 
+	a = a * 2;
 
 	// Printing into the LCD
 	lcd_string(5, 0, buffer);
@@ -120,7 +122,6 @@ int main_interrupt (void)
 	while (1) {}	
 	return 0;
 }
-
 SIGNAL (TIMER0_OVF_vect){
 	PORTB = ~PORTB;
 }
@@ -155,7 +156,6 @@ int main_interrupt (void)
 	while (1) {}	
 	return 0;
 }
-
 SIGNAL (TIMER0_COMP_vect){
 	PORTB = ~PORTB;
 }
