@@ -7,5 +7,5 @@
 4. Change the `src/Main.c` code, this is your ATmega128 program.
 5. Build the code using `control + option + B` shortcut.
 6. Check `.pio/build/ATmega128/firmware.hex` file that was generated automatically.
-a. Upload the `.hex` file in SimulIDE ATmega128 simulator.
-b. Upload the build in ATmega128 real hardware using `control + option + U` shortcut.
+7. Upload the `.hex` file in SimulIDE ATmega128 simulator.
+8. Upload the build in ATmega128 real hardware using `control + option + U` shortcut.
